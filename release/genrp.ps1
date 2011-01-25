@@ -10,6 +10,7 @@ cp ..\hdl\boardsupport\v4\* .\fpgaep\hdl\chipsupport\v4 -Exclude "*.svn"
 cp ..\hdl\boardsupport\v5\* .\fpgaep\hdl\chipsupport\v5 -Exclude "*.svn"
 New-Item .\fpgaep\hdl\modules -ItemType directory
 New-Item .\fpgaep\hdl\modules\md5 -ItemType directory
+New-Item .\fpgaep\hdl\modules\sha1 -ItemType directory
 New-Item .\fpgaep\hdl\modules\port_icap -ItemType directory
 New-Item .\fpgaep\hdl\modules\port_register -ItemType directory
 cp ..\hdl\md5\md5.v .\fpgaep\hdl\modules\md5
@@ -17,6 +18,7 @@ cp ..\hdl\md5\port_md5.v .\fpgaep\hdl\modules\md5
 cp ..\hdl\port_icap\port_icap_buf.v .\fpgaep\hdl\modules\port_icap
 cp ..\hdl\port_icap\shiftr_bram\shiftr_bram.v .\fpgaep\hdl\modules\port_icap
 cp ..\hdl\port_register\port_register.v .\fpgaep\hdl\modules\port_register
+cp ..\hdl\sha1\*.v .\fpgaep\hdl\modules\sha1
 New-Item .\fpgaep\hdl\packetprocessor -ItemType directory
 cp ..\hdl\PATLPP\alunit\alunit.v .\fpgaep\hdl\packetprocessor
 cp ..\hdl\PATLPP\checksum\checksum.v .\fpgaep\hdl\packetprocessor
@@ -46,21 +48,21 @@ cp ..\hdl\topv5.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_md5.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_simple.v .\fpgaep\hdl\toplevel
 New-Item .\fpgaep\java -ItemType directory
-cp $home\jworkspace\FCP\doc .\fpgaep\java -Recurse
+cp ..\java\doc .\fpgaep\java -Recurse
 New-Item .\fpgaep\java\examples -ItemType directory
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\examples\FCPInteface.java .\fpgaep\java\examples
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\examples\MD5GUI.java .\fpgaep\java\examples
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\examples\PRToolGUI.java .\fpgaep\java\examples
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\examples\Simple.java .\fpgaep\java\examples
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\examples\SimpleOperations.java .\fpgaep\java\examples
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\examples\ThroughputTest.java .\fpgaep\java\examples
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\FCPInteface.java .\fpgaep\java\examples
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\MD5GUI.java .\fpgaep\java\examples
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\PRToolGUI.java .\fpgaep\java\examples
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\Simple.java .\fpgaep\java\examples
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\SimpleOperations.java .\fpgaep\java\examples
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\ThroughputTest.java .\fpgaep\java\examples
 New-Item .\fpgaep\java\fcp -ItemType directory
 cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\fcp\* .\fpgaep\java\fcp -Exclude "FCPTest.java"
 New-Item .\fpgaep\java\subapi -ItemType directory
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\examples\SimpleInterface.java .\fpgaep\java\SubAPI
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\icapif\IcapInterface.java .\fpgaep\java\SubAPI
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\SimpleInterface.java .\fpgaep\java\SubAPI
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\icapif\IcapInterface.java .\fpgaep\java\SubAPI
 New-Item .\fpgaep\java\util -ItemType directory
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\util\StringUtil.java .\fpgaep\java\util\
+cp ..\java\src\edu\byu\cc\plieber\util\StringUtil.java .\fpgaep\java\util\
 New-Item .\fpgaep\example -ItemType directory
 cp ..\hdl\boardsupport\xupv5.ucf .\fpgaep\example\simple.ucf
 cp simple.prj .\fpgaep\example
