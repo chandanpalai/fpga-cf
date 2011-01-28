@@ -177,48 +177,48 @@ assign out_data = ({8{ch1_ren}} & ch1_in_data) | ({8{ch2_ren}} & ch2_in_data) | 
 //-------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------
 
-assign ch1_in_dst_rdy = out_dst_rdy;
-assign ch1_out_src_rdy = in_src_rdy;
+assign ch1_in_dst_rdy = out_dst_rdy & ch1_ren;
+assign ch1_out_src_rdy = in_src_rdy & ch1_wen;
 assign ch1_out_sof = in_sof;
 assign ch1_out_eof = in_eof;
 assign ch1_out_data = in_data;
 assign ch1_wen = wenables_i[1];
 assign ch1_ren = renables_i[1];
 
-assign ch2_in_dst_rdy = out_dst_rdy;
-assign ch2_out_src_rdy = in_src_rdy;
+assign ch2_in_dst_rdy = out_dst_rdy & ch2_ren;
+assign ch2_out_src_rdy = in_src_rdy & ch2_wen;
 assign ch2_out_sof = in_sof;
 assign ch2_out_eof = in_eof;
 assign ch2_out_data = in_data;
 assign ch2_wen = wenables_i[2];
 assign ch2_ren = renables_i[2];
 
-assign ch3_in_dst_rdy = out_dst_rdy;
-assign ch3_out_src_rdy = in_src_rdy;
+assign ch3_in_dst_rdy = out_dst_rdy & ch3_ren;
+assign ch3_out_src_rdy = in_src_rdy & ch3_wen;
 assign ch3_out_sof = in_sof;
 assign ch3_out_eof = in_eof;
 assign ch3_out_data = in_data;
 assign ch3_wen = wenables_i[3];
 assign ch3_ren = renables_i[3];
 
-assign ch4_in_dst_rdy = out_dst_rdy;
-assign ch4_out_src_rdy = in_src_rdy;
+assign ch4_in_dst_rdy = out_dst_rdy & ch4_ren;
+assign ch4_out_src_rdy = in_src_rdy & ch4_wen;
 assign ch4_out_sof = in_sof;
 assign ch4_out_eof = in_eof;
 assign ch4_out_data = in_data;
 assign ch4_wen = wenables_i[4];
 assign ch4_ren = renables_i[4];
 
-assign ch5_in_dst_rdy = out_dst_rdy;
-assign ch5_out_src_rdy = in_src_rdy;
+assign ch5_in_dst_rdy = out_dst_rdy & ch5_ren;
+assign ch5_out_src_rdy = in_src_rdy & ch5_wen;
 assign ch5_out_sof = in_sof;
 assign ch5_out_eof = in_eof;
 assign ch5_out_data = in_data;
 assign ch5_wen = wenables_i[5];
 assign ch5_ren = renables_i[5];
 
-assign ch6_in_dst_rdy = out_dst_rdy;
-assign ch6_out_src_rdy = in_src_rdy;
+assign ch6_in_dst_rdy = out_dst_rdy & ch6_ren;
+assign ch6_out_src_rdy = in_src_rdy & ch6_wen;
 assign ch6_out_sof = in_sof;
 assign ch6_out_eof = in_eof;
 assign ch6_out_data = in_data;

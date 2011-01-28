@@ -12,6 +12,7 @@ New-Item .\fpgaep\hdl\modules -ItemType directory
 New-Item .\fpgaep\hdl\modules\md5 -ItemType directory
 New-Item .\fpgaep\hdl\modules\sha1 -ItemType directory
 New-Item .\fpgaep\hdl\modules\port_icap -ItemType directory
+New-Item .\fpgaep\hdl\modules\port_clkcntl -ItemType directory
 New-Item .\fpgaep\hdl\modules\port_register -ItemType directory
 cp ..\hdl\md5\md5.v .\fpgaep\hdl\modules\md5
 cp ..\hdl\md5\port_md5.v .\fpgaep\hdl\modules\md5
@@ -19,6 +20,8 @@ cp ..\hdl\port_icap\port_icap_buf.v .\fpgaep\hdl\modules\port_icap
 cp ..\hdl\port_icap\shiftr_bram\shiftr_bram.v .\fpgaep\hdl\modules\port_icap
 cp ..\hdl\port_register\port_register.v .\fpgaep\hdl\modules\port_register
 cp ..\hdl\sha1\*.v .\fpgaep\hdl\modules\sha1
+cp ..\hdl\port_clkcntl\port_clkcntl.v .\fpgaep\hdl\modules\port_clkcntl
+cp ..\hdl\port_clkcntl\clockcntl.vhd .\fpgaep\hdl\modules\port_clkcntl
 New-Item .\fpgaep\hdl\packetprocessor -ItemType directory
 cp ..\hdl\PATLPP\alunit\alunit.v .\fpgaep\hdl\packetprocessor
 cp ..\hdl\PATLPP\checksum\checksum.v .\fpgaep\hdl\packetprocessor
@@ -42,11 +45,16 @@ New-Item .\fpgaep\hdl\tools\ChannelInterfaceGenerator -ItemType directory
 New-Item .\fpgaep\hdl\tools\PythonAssembler -ItemType directory
 cp ..\tools\ChannelInterfaceGenerator\chifgen.py .\fpgaep\hdl\tools\ChannelInterfaceGenerator
 cp ..\tools\PythonAssembler\*.py .\fpgaep\hdl\tools\PythonAssembler -Exclude "testcode.py"
+New-Item .\fpgaep\hdl\port_fifo -ItemType directory
+cp ..\hdl\port_fifo\port_fifo.v .\fpgaep\hdl\port_fifo
 New-Item .\fpgaep\hdl\toplevel -ItemType directory
 cp ..\hdl\topv4.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_md5.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_simple.v .\fpgaep\hdl\toplevel
+cp ..\hdl\topv5_sha1.v .\fpgaep\hdl\toplevel
+cp ..\hdl\topv5_proto.v .\fpgaep\hdl\toplevel
+cp ..\hdl\topv5_prototest.v .\fpgaep\hdl\toplevel
 New-Item .\fpgaep\java -ItemType directory
 cp ..\java\doc .\fpgaep\java -Recurse
 New-Item .\fpgaep\java\examples -ItemType directory

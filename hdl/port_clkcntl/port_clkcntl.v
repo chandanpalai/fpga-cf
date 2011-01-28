@@ -20,7 +20,8 @@ module port_clkcntl (
 	out_src_rdy,	// Output Source Ready
 	in_dst_rdy,		// Input Destination Ready
 	
-	usr_clk_out		// User clock out
+	usr_clk_out,	// User clock out
+	usr_rst_out		// User reset signal
 );
 
 // Port mode declarations:
@@ -42,6 +43,7 @@ output	out_eof;
 output	out_src_rdy;
 output	in_dst_rdy;
 output	usr_clk_out;
+output	usr_rst_out;
 
 // Control Register Masks
 `define	START		1
@@ -56,6 +58,7 @@ assign out_data = 0;
 assign out_sof = 0;
 assign out_eof = 0;
 assign out_src_rdy = 0;
+assign usr_rst_out = control_reg[2];
 
 always @(posedge clk or posedge rst)
 begin

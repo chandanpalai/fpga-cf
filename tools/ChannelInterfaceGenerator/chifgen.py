@@ -144,8 +144,8 @@ f.write(''';
 //-------------------------------------------------------------------------------------
 ''')
 for channel in range(1, numChannels+1): f.write('''
-assign ch{0:d}_in_dst_rdy = out_dst_rdy;
-assign ch{0:d}_out_src_rdy = in_src_rdy;
+assign ch{0:d}_in_dst_rdy = out_dst_rdy & ch{0:d}_ren;
+assign ch{0:d}_out_src_rdy = in_src_rdy & ch{0:d}_wen;
 assign ch{0:d}_out_sof = in_sof;
 assign ch{0:d}_out_eof = in_eof;
 assign ch{0:d}_out_data = in_data;

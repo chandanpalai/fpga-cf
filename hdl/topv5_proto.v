@@ -367,6 +367,7 @@ wire [7:0] LEDnext;
 assign LEDS = LEDr;
 
 wire clk_controlled;
+wire usr_rst;
 	
 always @(posedge clk_local)
 begin
@@ -383,7 +384,7 @@ end
 
 port_clkcntl clkcontrol (
 	.clk(clk_local),
-	.rst(rst),
+	.rst(rst_local),
 	.en(ch2_wen),
 	.in_data(ch2_out_data),
 	.in_sof(ch2_out_sof),
@@ -396,7 +397,8 @@ port_clkcntl clkcontrol (
 	.out_eof(),
 	.out_src_rdy(),
 	.in_dst_rdy(ch2_out_dst_rdy),
-	.usr_clk_out(clk_controlled)
+	.usr_clk_out(clk_controlled),
+	.usr_rst_out(usr_rst)
 );
 
 
@@ -406,15 +408,36 @@ port_clkcntl clkcontrol (
 //-------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------
 
-port_blank pr_channel_5 (
-	.clk(clk_local),
-	.rst(rst_local),
-	.wen ( ch5_wen ),
-	.ren ( ch5_ren ),
-	.in_data ( ch5_out_data ),	// Inport
-	.in_sof ( ch5_out_sof ),	// Inport
-	.in_eof ( ch5_out_eof ),	// Inport
-	.in_src_rdy ( ch5_out_src_rdy ),	// Inport
+wire channel_rst;
+assign channel_rst = rst_local & usr_rst;
+
+channel5 pr_channel_5 (
+	.clk(clk_controlled),
+	.rst(channel_rst),
+	.wen ( 1 ),
+	.ren ( 1 ),
+	.in_data ( ch5_out_data_l ),	// Inport
+	.in_sof ( ch5_out_sof_l ),	// Inport
+	.in_eof ( ch5_out_eof_l ),	// Inport
+	.in_src_rdy ( ch5_out_src_rdy_l ),	// Inport
+	.out_dst_rdy ( ch5_in_dst_rdy_l ),	// Outport
+
+	// Outputs:
+	.out_data ( ch5_in_data_l ),	// Outport
+	.out_sof ( ch5_in_sof_l ),	// Outport
+	.out_eof ( ch5_in_eof_l ),	// Outport
+	.out_src_rdy ( ch5_in_src_rdy_l ),	// Outport
+	.in_dst_rdy ( ch5_out_dst_rdy_l )	// Inport
+);
+
+port_fifo pf_channel_5_to_interface (
+	.rst(channel_rst),
+	.in_clk(clk_controlled),
+	.out_clk(clk_local),
+	.in_data ( ch5_in_data_l ),	// Inport
+	.in_sof ( ch5_in_sof_l ),	// Inport
+	.in_eof ( ch5_in_eof_l ),	// Inport
+	.in_src_rdy ( ch5_in_src_rdy_l ),	// Inport
 	.out_dst_rdy ( ch5_in_dst_rdy ),	// Outport
 
 	// Outputs:
@@ -422,12 +445,31 @@ port_blank pr_channel_5 (
 	.out_sof ( ch5_in_sof ),	// Outport
 	.out_eof ( ch5_in_eof ),	// Outport
 	.out_src_rdy ( ch5_in_src_rdy ),	// Outport
+	.in_dst_rdy ( ch5_in_dst_rdy_l )	// Inport
+);
+
+port_fifo pf_channel_5_from_interface (
+	.rst(channel_rst),
+	.in_clk(clk_local),
+	.out_clk(clk_controlled),
+	.in_data ( ch5_out_data ),	// Inport
+	.in_sof ( ch5_out_sof ),	// Inport
+	.in_eof ( ch5_out_eof ),	// Inport
+	.in_src_rdy ( ch5_out_src_rdy ),	// Inport
+	.out_dst_rdy ( ch5_out_dst_rdy_l ),	// Outport
+
+	// Outputs:
+	.out_data ( ch5_out_data_l ),	// Outport
+	.out_sof ( ch5_out_sof_l ),	// Outport
+	.out_eof ( ch5_out_eof_l ),	// Outport
+	.out_src_rdy ( ch5_out_src_rdy_l ),	// Outport
 	.in_dst_rdy ( ch5_out_dst_rdy )	// Inport
 );
 
-port_blank pr_channel_6 (
+
+channel6 pr_channel_6 (
 	.clk(clk_local),
-	.rst(rst_local),
+	.rst(channel_rst),
 	.wen ( ch6_wen ),
 	.ren ( ch6_ren ),
 	.in_data ( ch6_out_data ),	// Inport
