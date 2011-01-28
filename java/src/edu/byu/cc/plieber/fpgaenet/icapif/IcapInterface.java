@@ -70,14 +70,10 @@ public class IcapInterface {
 	/**
 	 * Send a list of bytes to the ICAP.
 	 * @param bytes
+	 * @throws FCPException 
 	 */
-	public void sendIcapData(java.util.List<Byte> bytes) {
-		try {
-			this.fcpprotocol.send(this.icapWritePort, bytes, bytes.size());
-		} catch (FCPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void sendIcapData(java.util.List<Byte> bytes) throws FCPException {
+		this.fcpprotocol.send(this.icapWritePort, bytes, bytes.size());
 	}
 
 	/**
@@ -113,12 +109,7 @@ public class IcapInterface {
 			while (offset < file.length()
 					&& (numRead = is.read(writereg, 0, 1024)) >= 0) {
 				offset += numRead;
-				try {
-					fcpprotocol.send(3, writereg, numRead);
-				} catch (FCPException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				fcpprotocol.send(3, writereg, numRead);
 			}
 		} catch (FileNotFoundException e) {
 			throw new FCPException("File not found: " + fileName);

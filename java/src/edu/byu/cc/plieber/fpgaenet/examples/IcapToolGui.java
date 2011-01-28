@@ -102,7 +102,12 @@ public class IcapToolGui extends QMainWindow {
 		icapTools = new IcapTools(icapif);
 		icapReadback = new IcapReadback(icapTools);
 		while(!fcpProtocol.isConnected());
-		icapTools.synchIcap();
+		try {
+			icapTools.synchIcap();
+		} catch (FCPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void createActions() {

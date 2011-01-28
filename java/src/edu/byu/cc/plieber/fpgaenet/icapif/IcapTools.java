@@ -38,28 +38,31 @@ public class IcapTools {
 	/**
 	 * Writes a packet to the ICAP
 	 * @param packet
+	 * @throws FCPException 
 	 */
-	public void write(edu.byu.ece.bitstreamTools.bitstream.Packet packet) {
+	public void write(edu.byu.ece.bitstreamTools.bitstream.Packet packet) throws FCPException {
 		this.icapif.sendIcapData(packet.toByteArray());
 	}
 	
 	/**
 	 * Writes a packet list to the ICAP
 	 * @param packet
+	 * @throws FCPException 
 	 */
-	public void write(edu.byu.ece.bitstreamTools.bitstream.PacketList packetList) {
+	public void write(edu.byu.ece.bitstreamTools.bitstream.PacketList packetList) throws FCPException {
 		this.icapif.sendIcapData(packetList.toByteArray());
 	}
 	
 	/**
 	 * Writes dummy/synch data from a DummySyncData object.
 	 * @param synchData
+	 * @throws FCPException 
 	 */
-	public void write(edu.byu.ece.bitstreamTools.bitstream.DummySyncData synchData) {
+	public void write(edu.byu.ece.bitstreamTools.bitstream.DummySyncData synchData) throws FCPException {
 		this.icapif.sendIcapData(synchData.getData());
 	}
 	
-	public void write(edu.byu.ece.bitstreamTools.configuration.Frame frame) throws BitstreamException {
+	public void write(edu.byu.ece.bitstreamTools.configuration.Frame frame) throws BitstreamException, FCPException {
 		PacketList packets = new PacketList();
 		packets.addAll(PacketUtils.NOP_PACKETS(2));
 		packets.add(PacketUtils.RCRC_CMD_PACKET);
@@ -85,7 +88,7 @@ public class IcapTools {
 		this.write(packets);
 	}
 	
-	public void write(edu.byu.ece.bitstreamTools.bitstream.RegisterType regtype, int value) throws BitstreamException {
+	public void write(edu.byu.ece.bitstreamTools.bitstream.RegisterType regtype, int value) throws BitstreamException, FCPException {
 		PacketList packets = new PacketList();
 		//packets.addAll(PacketUtils.NOP_PACKETS(1));
 		//packets.add(PacketUtils.IDCODE_PACKET(0x2AD6093));
@@ -113,7 +116,7 @@ public class IcapTools {
 		this.write(packets);
 	}
 	
-	public void synchIcap() {
+	public void synchIcap() throws FCPException {
 		//write(DummySyncData.V5_V6_ICAP_DUMMY_SYNC_DATA);
 		write(DummySyncData.V5_V6_STANDARD_DUMMY_SYNC_DATA);
 	}

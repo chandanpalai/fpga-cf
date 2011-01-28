@@ -303,6 +303,7 @@ public class FCPProtocol {
 		fp.len = 0;
 		fp.dest = address;
 		fp.dstPort = port;
+		this.connected = false;
 		try {
 			sendThread.sendQueue.put(fp);
 		} catch (InterruptedException e) {

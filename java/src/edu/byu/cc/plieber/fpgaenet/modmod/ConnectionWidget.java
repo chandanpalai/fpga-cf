@@ -45,7 +45,7 @@ public class ConnectionWidget extends QWidget {
 			spnSourcePort.setValue(fcpprotocol.getSourceUDPPort());
 			spnDestPort.setValue(fcpprotocol.getDestUDPPort());
 			if (fcpprotocol.getDestIPAddress() != null)
-				txtFPGAIP.setText(fcpprotocol.getDestIPAddress().toString());
+				txtFPGAIP.setText(fcpprotocol.getDestIPAddress().getHostAddress());
 			else
 				txtFPGAIP.setText("10.0.1.42");
 			textStatus.setText(fcpprotocol.isConnected() ? "Connected" : "Not Connected");
@@ -121,6 +121,7 @@ public class ConnectionWidget extends QWidget {
 		}
 		else {
 			try {
+				//if (fcpprotocol.isConnected()) fcpprotocol.disconnect();
 				fcpprotocol.connect(InetAddress.getByName(this.txtFPGAIP.text()), spnDestPort.value());
 				while (!fcpprotocol.isConnected());
 				this.textStatus.setText("Connected!");

@@ -52,13 +52,6 @@ public class ModularModules extends QMainWindow {
 	public ModularModules(QWidget parent) {
 		super(parent);
 		this.setWindowTitle("Module Modules");
-		createActions();
-		createMenus();
-		// makeConnections();
-		createWidgets();
-		createLayout();
-		connectSignalsAndSlots();
-
 		try {
 			fcpProtocol = new FCPProtocol();
 			icapInterface = new IcapInterface(fcpProtocol, 3, 4);
@@ -67,6 +60,14 @@ public class ModularModules extends QMainWindow {
 			e.printStackTrace();
 			QMessageBox.critical(this, "Bind Error", "Could not bind socket.");
 		}
+		
+		createActions();
+		createMenus();
+		// makeConnections();
+		createWidgets();
+		createLayout();
+		connectSignalsAndSlots();
+		
 		connectionChanged();
 	}
 
@@ -139,17 +140,11 @@ public class ModularModules extends QMainWindow {
 
 	private void createWidgets() {
 		moduleStack = new QStackedWidget(this);
-		staticWidget = new StaticModulesWidget(this, null);
+		staticWidget = new StaticModulesWidget(this, fcpProtocol);
 		availWidget = new AvailableModulesWidget(this);
 		configWidget = new ChannelConfigurationWidget(this);
 		md5Widget = new MD5Widget(moduleStack, fcpProtocol);
 		sha1Widget = new SHA1Widget(moduleStack, fcpProtocol);
-		// availWidget.addModule(new AvailableModule("32-bit\nRegister",
-		// availWidget));
-		// availWidget.addModule(new AvailableModule("MD5", availWidget,
-		// md5Widget));
-		// availWidget.addModule(new AvailableModule("SHA1", availWidget,
-		// sha1Widget));
 	}
 
 	private void createLayout() {

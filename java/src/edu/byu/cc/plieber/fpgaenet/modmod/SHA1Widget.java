@@ -1,4 +1,6 @@
 package edu.byu.cc.plieber.fpgaenet.modmod;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 import com.trolltech.qt.gui.*;
@@ -9,6 +11,26 @@ import edu.byu.cc.plieber.fpgaenet.fcp.FCPProtocol;
 import edu.byu.cc.plieber.util.StringUtil;
 
 public class SHA1Widget extends ModuleControlWidget{
+	
+	public static void main(String[] args) {
+		QApplication.initialize(args);
+		
+		FCPProtocol p = null;
+		try {
+			p = new FCPProtocol();
+			p.connect(InetAddress.getByName("10.0.1.42"));
+			while (!p.isConnected());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SHA1Widget w = new SHA1Widget(null, p);
+		w.setChannelNumber(6);
+		w.show();
+		QApplication.exec();
+		p.disconnect();		
+		
+	}
 
     public SHA1Widget(QWidget parent, FCPProtocol protocol){
         super(parent);

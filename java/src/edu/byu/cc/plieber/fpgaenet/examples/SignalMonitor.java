@@ -75,7 +75,7 @@ public class SignalMonitor extends QMainWindow{
 	private void setupConnections() {
 		try {
 			fcpProtocol = new FCPProtocol();
-			fcpProtocol.connect(InetAddress.getByName("192.168.1.222"), 0x3001);
+			fcpProtocol.connect(InetAddress.getByName("10.0.1.42"), 0x3001);
 		} catch (IOException e) {
 			return;
 		}
@@ -83,7 +83,12 @@ public class SignalMonitor extends QMainWindow{
 		icapTools = new IcapTools(icapif);
 		icapReadback = new IcapReadback(icapTools);
 		while(!fcpProtocol.isConnected());
-		icapTools.synchIcap();
+		try {
+			icapTools.synchIcap();
+		} catch (FCPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void createActions() {
@@ -144,6 +149,7 @@ public class SignalMonitor extends QMainWindow{
 	protected void openLL() {
 		String fName = QFileDialog.getOpenFileName(this, tr("Open LL File"), "", new QFileDialog.Filter(
 				tr("LL Files (*.ll *.LL)")));
+		if (fName == null || fName.compareTo("") == 0) return;
 		LogicalMapping llMapping = new LogicalMapping(fName);
 		netListModel = new NetListModel(llMapping);
 		listProxyModel = new QSortFilterProxyModel(this);
