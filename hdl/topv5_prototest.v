@@ -246,6 +246,19 @@ wire [7:0] ch5_out_data;
 wire ch5_wen;
 wire ch5_ren;
 
+wire ch5_in_sof_l;
+wire ch5_in_eof_l;
+wire ch5_in_src_rdy_l;
+wire ch5_in_dst_rdy_l;
+wire [7:0] ch5_in_data_l;
+wire ch5_out_sof_l;
+wire ch5_out_eof_l;
+wire ch5_out_src_rdy_l;
+wire ch5_out_dst_rdy_l;
+wire [7:0] ch5_out_data_l;
+wire ch5_wen_l;
+wire ch5_ren_l;
+
 wire ch6_in_sof;
 wire ch6_in_eof;
 wire ch6_in_src_rdy;
@@ -408,9 +421,9 @@ port_clkcntl clkcontrol (
 //-------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------
 
-port_sha1 pr_channel_5 (
+port_md5 md5_channel_5 (
 	.clk(clk_controlled),
-	.rst(rst_local),
+	.rst(usr_rst),
 	.wen ( 1 ),
 	.ren ( 1 ),
 	.in_data ( ch5_out_data_l ),	// Inport
@@ -464,7 +477,7 @@ port_fifo pf_channel_5_from_interface (
 );
 
 
-port_sha1 pr_channel_6 (
+port_sha1 sha1_channel_6 (
 	.clk(clk_local),
 	.rst(rst_local),
 	.wen ( ch6_wen ),

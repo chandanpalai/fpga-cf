@@ -1,5 +1,5 @@
 # Generate Release Package for the FPGA Ethernet Platform
-#Remove-Item fpgaep -recurse
+Remove-Item fpgaep -recurse
 New-Item .\fpgaep -ItemType directory
 New-Item .\fpgaep\hdl -ItemType directory
 New-Item .\fpgaep\hdl\boardsupport -ItemType directory
@@ -54,6 +54,7 @@ cp ..\hdl\topv5_md5.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_simple.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_sha1.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_proto.v .\fpgaep\hdl\toplevel
+cp ..\hdl\topv5_echo.v .\fpgaep\hdl\toplevel
 cp ..\hdl\topv5_prototest.v .\fpgaep\hdl\toplevel
 New-Item .\fpgaep\java -ItemType directory
 cp ..\java\doc .\fpgaep\java -Recurse
@@ -65,7 +66,7 @@ cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\Simple.java .\fpgaep\java\ex
 cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\SimpleOperations.java .\fpgaep\java\examples
 cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\ThroughputTest.java .\fpgaep\java\examples
 New-Item .\fpgaep\java\fcp -ItemType directory
-cp $home\jworkspace\FCP\src\edu\byu\cc\plieber\fpgaenet\fcp\* .\fpgaep\java\fcp -Exclude "FCPTest.java"
+cp ..\java\src\edu\byu\cc\plieber\fpgaenet\fcp\* .\fpgaep\java\fcp -Exclude "FCPTest.java"
 New-Item .\fpgaep\java\subapi -ItemType directory
 cp ..\java\src\edu\byu\cc\plieber\fpgaenet\examples\SimpleInterface.java .\fpgaep\java\SubAPI
 cp ..\java\src\edu\byu\cc\plieber\fpgaenet\icapif\IcapInterface.java .\fpgaep\java\SubAPI
